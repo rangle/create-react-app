@@ -37,6 +37,9 @@ const publicUrl = publicPath.slice(0, -1);
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
 
+// Get postcss and cssnext config for webpack
+var postcss = require('./rangle/postcss');
+
 // Assert this just to be safe.
 // Development builds of React are slow and not intended for production.
 if (env.stringified['process.env'].NODE_ENV !== '"production"') {
@@ -206,16 +209,7 @@ module.exports = {
                   loader: 'postcss-loader',
                   options: {
                     ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
-                    plugins: () => [
-                      autoprefixer({
-                        browsers: [
-                          '>1%',
-                          'last 4 versions',
-                          'Firefox ESR',
-                          'not ie < 9', // React doesn't support IE8 anyway
-                        ],
-                      }),
-                    ],
+                    plugins: postcss,
                   },
                 },
               ],
@@ -283,6 +277,9 @@ module.exports = {
     new ManifestPlugin({
       fileName: 'asset-manifest.json',
     }),
+
+    // rangle custom plugins such as stylelint
+    ...require('./rangle/plugins'),
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.

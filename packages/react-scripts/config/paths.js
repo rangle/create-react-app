@@ -86,6 +86,8 @@ module.exports = {
   nodePaths: nodePaths,
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
+  testsCustomConfig: resolveApp('jest-config.json'),
+  browsersFile: resolveApp('browsers.json'),
 };
 
 // @remove-on-eject-begin
@@ -111,6 +113,8 @@ module.exports = {
   // These properties only exist before ejecting:
   ownPath: resolveOwn('.'),
   ownNodeModules: resolveOwn('node_modules'), // This is empty on npm 3
+  testsCustomConfig: resolveApp('jest-config.json'),
+  browsersFile: resolveApp('browsers.json'),
 };
 
 const ownPackageJson = require('../package.json');
@@ -140,6 +144,8 @@ if (
     // These properties only exist before ejecting:
     ownPath: resolveOwn('.'),
     ownNodeModules: resolveOwn('node_modules'),
+    testsCustomConfig: resolveApp('jest-config.json'),
+    browsersFile: resolveApp('browsers.json'),
   };
 }
 // @remove-on-eject-end

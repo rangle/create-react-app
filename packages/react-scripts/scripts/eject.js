@@ -46,7 +46,13 @@ prompt(
     }
   }
 
-  const folders = ['config', 'config/jest', 'scripts', 'scripts/utils'];
+  const folders = [
+    'config',
+    'config/jest',
+    'config/rangle',
+    'scripts',
+    'scripts/utils',
+  ];
 
   // Make shallow array of files paths
   const files = folders.reduce(
@@ -101,10 +107,10 @@ prompt(
   const ownPackage = require(path.join(ownPath, 'package.json'));
   const appPackage = require(path.join(appPath, 'package.json'));
   const babelConfig = JSON.parse(
-    fs.readFileSync(path.join(ownPath, '.babelrc'), 'utf8')
+    fs.readFileSync(path.join(ownPath, 'babelrc'), 'utf8')
   );
   const eslintConfig = JSON.parse(
-    fs.readFileSync(path.join(ownPath, '.eslintrc'), 'utf8')
+    fs.readFileSync(path.join(ownPath, 'eslintrc'), 'utf8')
   );
 
   console.log(cyan('Updating the dependencies'));
@@ -177,6 +183,11 @@ prompt(
     } catch (e) {
       // It's not essential that this succeeds
     }
+  }
+
+  if (fs.existsSync(paths.testsCustomConfig)) {
+    console.log(cyan('Removing custom jest-config.json...'));
+    fs.removeSync(paths.testsCustomConfig);
   }
 
   if (fs.existsSync(paths.yarnLockFile)) {

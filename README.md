@@ -44,6 +44,7 @@ Redux dependencies added to the project along with routers and few other librari
      "react-router-redux": "^4.0.7",
      "redux": "^3.6.0",
      "redux-form": "^6.4.3",
+     "redux-beacon": "^0.2.0",
 ...
 ```
 

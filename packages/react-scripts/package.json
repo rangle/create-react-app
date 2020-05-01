@@ -71,7 +71,8 @@
     "webpack": "2.2.1",
     "webpack-dev-server": "2.4.1",
     "webpack-manifest-plugin": "1.1.0",
-    "whatwg-fetch": "2.0.2"
+    "whatwg-fetch": "2.0.2",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "react": "^15.3.0",
@@ -79,5 +80,10 @@
   },
   "optionalDependencies": {
     "fsevents": "1.0.17"
-  }
+  },
+  "scripts": {
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "snyk": true
 }
